@@ -61,3 +61,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "slim-rails", "~> 3.7"
+
+gem 'html2slim-ruby3', '~> 0.2.1', group: :development
