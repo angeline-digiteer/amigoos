@@ -8,3 +8,23 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ @import "bootstrap";
+
+ .navbar-brand {
+   font-weight: bold;
+ }
+ 
+ .card {
+     transition: transform 0.3s ease;
+ }
+ .card:hover {
+     transform: translateY(-2px);
+ }
+ 
+ .btn-group .btn {
+     margin-right: 0.25rem;
+ }
+ 
+ .btn-group .btn:last-child {
+     margin-right: 0;
+ }

@@ -1,0 +1,29 @@
+/ Navigation
+nav.navbar.navbar-expand-lg.bg-body-tertiary
+  .container-fluid
+    = link_to "Amigoos", root_path, class: "navbar-brand"
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbarSupportedContent
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          = link_to "Feed", root_path, class: "nav-link #{'active' if current_page?(root_path)}", aria: { current: current_page?(root_path) ? 'page' : nil }
+        li.nav-item
+          = link_to "Barkada Spaces", posts_path, class: "nav-link #{'active' if current_page?(posts_path)}"
+        li.nav-item
+          = link_to "Hangouts", posts_path, class: "nav-link #{'active' if current_page?(posts_path)}"
+        li.nav-item
+          = link_to "Stickers & Memes", posts_path, class: "nav-link #{'active' if current_page?(posts_path)}"
+      ul.navbar-nav
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle[href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"]
+            | Account
+          ul.dropdown-menu
+            li
+              = link_to "Profile", new_post_path, class: "dropdown-item"
+            li
+              = link_to "My Posts", posts_path, class: "dropdown-item"
+            li
+              hr.dropdown-divider
+            li
+              = link_to "Feed", new_post_path, class: "dropdown-item"
