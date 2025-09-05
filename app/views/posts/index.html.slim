@@ -1,11 +1,38 @@
-p[style="color: green"]
-  = notice
-- content_for :title, "Posts"
-h1
-  | Posts
-#posts
-  - @posts.each do |post|
-    = render post
-    p
-      = link_to "Show this post", post
-= link_to "New post", new_post_path
+.container-fluid.py-3
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1.mb-0 Posts
+    = link_to "New Post", new_post_path, class: "btn btn-primary"
+  
+  - if notice
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      = notice
+      button.btn-close type="button" data-bs-dismiss="alert"
+  
+  .row
+    - @posts.each do |post|
+      .col-md-6.col-lg-4.mb-4
+        .card.h-100.shadow-sm
+          .card-body
+            - if post.featured
+              .badge.bg-warning.text-dark.mb-2
+                i.fas.fa-star.me-1
+                | Featured
+            h5.card-title = post.title
+            p.card-text.text-muted.small = post.author
+            p.card-text = truncate(post.content, length: 100)
+            .text-muted.small.mb-3
+              = post.publish_date.strftime("%B %d, %Y")
+              - if post.active
+                span.badge.bg-success.ms-2 Active
+              - else
+                span.badge.bg-secondary.ms-2 Inactive
+          .card-footer.bg-transparent.border-0
+            .d-flex.justify-content-between
+              = link_to "View", post, class: "btn btn-outline-primary btn-sm"
+              = link_to "Edit", edit_post_path(post), class: "btn btn-outline-secondary btn-sm"
+              = link_to "Delete", post, method: :delete, 
+                        class: "btn btn-outline-danger btn-sm",
+                        data: { confirm: "Are you sure?" }
+  
+  .d-flex.justify-content-center.mt-4
+    = paginate @posts
