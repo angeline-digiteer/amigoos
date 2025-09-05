@@ -1,9 +1,14 @@
-- content_for :title, "Editing post"
-h1
-  | Editing post
-= render "form", post: @post
-br
-div
-  = link_to "Show this post", @post
-  |  | 
-  = link_to "Back to posts", posts_path
+.container.py-4
+  .row.justify-content-center
+    .col-lg-8
+      .card.shadow
+        .card-header.bg-warning.text-dark
+          h3.mb-0
+            i.fas.fa-edit.me-2
+            | Editing Post
+        .card-body.p-4
+          = render "form", post: @post
+        .card-footer.bg-light
+          .d-flex.justify-content-between
+            = link_to "← Back to Posts", posts_path, class: "btn btn-outline-secondary"
+            = link_to "View Post", @post, class: "btn btn-outline-primary"

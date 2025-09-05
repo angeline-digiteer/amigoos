@@ -1,28 +1,36 @@
 = form_with(model: post) do |form|
   - if post.errors.any?
-    div[style="color: red"]
+    .alert.alert-danger
+      h4 = pluralize(post.errors.count, "error") + " prohibited this post from being saved:"
+      ul.mb-0
+        - post.errors.each do |error|
+          li = error.full_message
 
-    h2
-      = pluralize(post.errors.count, "error")
-      |  prohibited this post from being saved:
-    ul
-      - post.errors.each do |error|
-        li
-          = error.full_message
-  div
-    = form.label :title, style: "display: block"
-    = form.text_field :title
-  div
-    = form.label :content, style: "display: block"
-    = form.textarea :content
-  div
-    = form.label :publish_date, style: "display: block"
-    = form.date_field :publish_date
-  div
-    = form.label :active, style: "display: block"
-    = form.checkbox :active
-  div
-    = form.label :permalink, style: "display: block"
-    = form.text_field :permalink
-  div
-    = form.submit
+  .mb-3
+    = form.label :title, class: "form-label"
+    = form.text_field :title, class: "form-control"
+  
+  .mb-3
+    = form.label :author, class: "form-label"
+    = form.text_field :author, class: "form-control"
+  
+  .mb-3
+    = form.label :content, class: "form-label"
+    = form.text_area :content, class: "form-control", rows: 5
+  
+  .mb-3
+    = form.label :publish_date, class: "form-label"
+    = form.date_field :publish_date, class: "form-control"
+  
+  .mb-3
+    .form-check
+      = form.check_box :active, class: "form-check-input"
+      = form.label :active, "Active", class: "form-check-label"
+  
+  .mb-3
+    .form-check
+      = form.check_box :featured, class: "form-check-input"
+      = form.label :featured, "Featured", class: "form-check-label"
+  
+  .mb-3
+    = form.submit class: "btn btn-primary"

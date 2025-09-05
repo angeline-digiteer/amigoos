@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.recent.page(params[:page]).per(10)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -58,13 +58,14 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.expect(post: [ :title, :content, :publish_date, :active])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.expect(post: [:title, :author, :content, :publish_date, :active, :featured])
+  end
 end
